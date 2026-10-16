@@ -12,6 +12,7 @@ import * as selectField from "@/fields/core/select";
 import * as stringField from "@/fields/core/string";
 import * as textField from "@/fields/core/text";
 import * as uuidField from "@/fields/core/uuid";
+import { customFields } from "@/fields/custom.generated";
 
 type FieldModule = {
   label?: string;
@@ -56,5 +57,9 @@ registerField("select", selectField);
 registerField("string", stringField);
 registerField("text", textField);
 registerField("uuid", uuidField);
+
+for (const [fieldName, fieldModule] of Object.entries(customFields)) {
+  registerField(fieldName, fieldModule);
+}
 
 export { labels, schemas, readFns, writeFns, defaultValues, editComponents, viewComponents, fieldTypes };
