@@ -170,9 +170,13 @@ const FocalFrame = ({
     if (readonly || event.button !== 0) return;
     event.preventDefault();
     event.currentTarget.focus();
-    event.currentTarget.setPointerCapture(event.pointerId);
     pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
     rebaseGesture();
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Capture can be rejected. The gesture still tracks this pointer.
+    }
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
