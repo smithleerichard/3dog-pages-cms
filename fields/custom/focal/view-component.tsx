@@ -1,14 +1,14 @@
 "use client";
 
-import { focalToCss, parseFocal } from "./value";
+import { formatFocal, parseFocal } from "./value";
 
 const ViewComponent = ({ value }: { value: unknown }) => {
-  const point = parseFocal(value);
-  if (!point) return null;
+  const focal = parseFocal(value);
+  if (!focal) return null;
 
   return (
     <span className="text-muted-foreground text-xs tabular-nums">
-      {focalToCss(point)}
+      {formatFocal(focal)}
     </span>
   );
 };
